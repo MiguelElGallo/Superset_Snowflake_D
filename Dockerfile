@@ -1,7 +1,7 @@
 ARG NODE_VERSION=12
 ARG PYTHON_VERSION=3.6
 
-#
+# 
 # --- Build assets with NodeJS
 #
 
@@ -42,7 +42,7 @@ RUN tar czfv /tmp/superset.tar.gz requirements.txt requirements-db.txt dist
 #
 
 FROM python:${PYTHON_VERSION} AS final
-
+# Set Python path to data volume
 # Configure environment
 ENV GUNICORN_BIND=0.0.0.0:8088 \
     GUNICORN_LIMIT_REQUEST_FIELD_SIZE=0 \
