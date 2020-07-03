@@ -19,6 +19,7 @@ RUN tar xzf /tmp/superset.tar.gz -C ${SUPERSET_HOME} --strip-components=1
 # Build assets
 WORKDIR ${SUPERSET_HOME}/superset-frontend/
 RUN npm install
+RUN npm update
 RUN npm run build
 
 #
@@ -49,7 +50,7 @@ ENV GUNICORN_BIND=0.0.0.0:8088 \
     GUNICORN_LIMIT_REQUEST_LINE=0 \
     GUNICORN_TIMEOUT=60 \
     GUNICORN_WORKERS=3 \
-    GUNICORN_THREADS=3 \
+    GUNICORN_THREADS=4 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PYTHONPATH=/var/lib/superset:$PYTHONPATH \
