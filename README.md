@@ -6,7 +6,9 @@
 
 Docker image for [Superset](https://github.com/ApacheInfra/superset).
 
-This project is unofficial and not related to Superset or Apache.
+This project is unofficial and not related to Superset or Apache. Is a copy of https://github.com/amancevice/docker-superset
+
+Idea is to make this image to support connections to SnowFlake
 
 ## Download
 
