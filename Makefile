@@ -1,6 +1,6 @@
 REPO             := mpz1/superset_snowflake
 STAGES           := build dist final
-NODE_VERSION     := node:10
+NODE_VERSION     := 10
 PYTHON_VERSION   := 3.6.9
 SUPERSET_VERSION := 0.36.0
 
