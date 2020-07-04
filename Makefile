@@ -1,7 +1,7 @@
 REPO             := mpz1/superset_snowflake
 STAGES           := build dist final
-NODE_VERSION     := 12
-PYTHON_VERSION   := 3.8
+NODE_VERSION     := node:10-jessie
+PYTHON_VERSION   := 3.6.9
 SUPERSET_VERSION := 0.36.0
 
 .PHONY: default clean clobber edge latest push

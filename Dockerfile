@@ -1,5 +1,5 @@
-ARG NODE_VERSION=12
-ARG PYTHON_VERSION=3.8
+ARG NODE_VERSION=node:10-jessie
+ARG PYTHON_VERSION=3.6.9
 
 # 
 # --- Build assets with NodeJS
