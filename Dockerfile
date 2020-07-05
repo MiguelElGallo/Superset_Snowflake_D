@@ -85,7 +85,7 @@ RUN groupadd supergroup && \
         libssl1.0 && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
-    pip install dist/*.tar.gz -r requirements.txt -r requirements-db.txt -t /var/lib/superset && \
+    pip install dist/*.tar.gz -r requirements.txt -r requirements-db.txt && \
     rm -rf ./*
 
 # Configure Filesystem
