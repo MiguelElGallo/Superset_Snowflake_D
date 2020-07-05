@@ -53,7 +53,8 @@ ENV GUNICORN_BIND=0.0.0.0:8088 \
     GUNICORN_THREADS=4 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
-    PYTHONPATH=/var/lib/superset:$PYTHONPATH \
+    PYTHONPATH=/var/lib/superset \
+    PYTHONPATH=/etc/superset:/home/superset:$PYTHONPATH \
     SUPERSET_REPO=apache/incubator-superset \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
     SUPERSET_HOME=/var/lib/superset
@@ -85,7 +86,7 @@ RUN groupadd supergroup && \
         libssl1.0 && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
-    pip install dist/*.tar.gz -r requirements.txt -r requirements-db.txt && \
+    pip install dist/*.tar.gz -r requirements.txt -r requirements-db.txt -t /var/lib/superset && \
     rm -rf ./*
 
 # Configure Filesystem
