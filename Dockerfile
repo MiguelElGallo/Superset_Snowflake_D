@@ -1,7 +1,7 @@
 ARG NODE_VERSION=10
 ARG PYTHON_VERSION=3.6.9
 
-# 
+#
 # --- Build assets with NodeJS
 #
 
@@ -19,7 +19,6 @@ RUN tar xzf /tmp/superset.tar.gz -C ${SUPERSET_HOME} --strip-components=1
 # Build assets
 WORKDIR ${SUPERSET_HOME}/superset-frontend/
 RUN npm install
-# RUN npm update
 RUN npm run build
 
 #
@@ -43,17 +42,17 @@ RUN tar czfv /tmp/superset.tar.gz requirements.txt requirements-db.txt dist
 #
 
 FROM python:${PYTHON_VERSION} AS final
-# Set Python path to data volume
+
 # Configure environment
 ENV GUNICORN_BIND=0.0.0.0:8088 \
     GUNICORN_LIMIT_REQUEST_FIELD_SIZE=0 \
     GUNICORN_LIMIT_REQUEST_LINE=0 \
     GUNICORN_TIMEOUT=60 \
-    GUNICORN_WORKERS=4 \
+    GUNICORN_WORKERS=3 \
     GUNICORN_THREADS=4 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
-    PYTHONPATH=/etc/superset/pips \
+    PYTHONPATH=/etc/superset:/home/superset:$PYTHONPATH \
     SUPERSET_REPO=apache/incubator-superset \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
     SUPERSET_HOME=/var/lib/superset
@@ -65,7 +64,6 @@ COPY --from=dist /tmp/superset.tar.gz .
 RUN groupadd supergroup && \
     useradd -U -m -G supergroup superset && \
     mkdir -p /etc/superset && \
-    mkdir -p /etc/superset/pips && \
     mkdir -p ${SUPERSET_HOME} && \
     chown -R superset:superset /etc/superset && \
     chown -R superset:superset ${SUPERSET_HOME} && \
@@ -86,7 +84,7 @@ RUN groupadd supergroup && \
         libssl1.0 && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
-    pip install -t /etc/superset/pips dist/*.tar.gz -r requirements.txt -r requirements-db.txt && \
+    pip install dist/*.tar.gz -r requirements.txt -r requirements-db.txt && \
     rm -rf ./*
 
 # Configure Filesystem
