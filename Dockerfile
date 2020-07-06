@@ -53,7 +53,7 @@ ENV GUNICORN_BIND=0.0.0.0:8088 \
     GUNICORN_THREADS=4 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
-    PYTHONPATH=/var/lib/superset \
+    PYTHONPATH=/etc/superset/pips \
     SUPERSET_REPO=apache/incubator-superset \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
     SUPERSET_HOME=/var/lib/superset
@@ -65,6 +65,7 @@ COPY --from=dist /tmp/superset.tar.gz .
 RUN groupadd supergroup && \
     useradd -U -m -G supergroup superset && \
     mkdir -p /etc/superset && \
+    mkdir -p /etc/superset/pips && \
     mkdir -p ${SUPERSET_HOME} && \
     chown -R superset:superset /etc/superset && \
     chown -R superset:superset ${SUPERSET_HOME} && \
