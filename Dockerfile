@@ -86,7 +86,7 @@ RUN groupadd supergroup && \
         libssl1.0 && \
     apt-get clean && \
     tar xzf superset.tar.gz && \
-    pip install dist/*.tar.gz -r requirements.txt -r requirements-db.txt && -t /etc/superset/pips \
+    pip install dist/*.tar.gz -r requirements.txt -r requirements-db.txt -t /etc/superset/pips && \
     rm -rf ./*
 
 # Configure Filesystem
