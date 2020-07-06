@@ -15,7 +15,7 @@ Idea is to make this image to support connections to SnowFlake
 Download this image from the Docker registry:
 
 ```bash
-docker pull amancevice/superset:<version>
+docker pull MiguelElGallo/Superset_Snowflake_D:<version>
 ```
 
 ## Building
